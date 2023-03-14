@@ -6,6 +6,7 @@
 }],
     "routes":[
         {
+            "src":"/register/index.js",
             "src":"/(.*)",
             "dest":"/"
         }
