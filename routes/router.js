@@ -71,7 +71,7 @@ router.post('/register', async (req, res, next) => {
                 expires: new Date(Date.now() + 3000000),
                 httpOnly: true,
                 secure: true,
-                sameSite: 'strict'
+                
             })
              
             console.log(register)
