@@ -61,7 +61,7 @@ router.post('/register', async (req, res, next) => {
             const register = new Registers({
                 name,
                 email,
-                //    message,  
+             
                 number
             })
             const token = await register.generateAuthToken()
@@ -76,7 +76,7 @@ router.post('/register', async (req, res, next) => {
              
             console.log(register)
            await register.save()
-            res.status(200).json({data:"save successfuly"})
+           res.send('data send successfuly')
         }
     } catch (error) {
         res.status(422).send('Invalid Registration')
