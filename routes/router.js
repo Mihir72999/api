@@ -1,7 +1,7 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import authantication from '../auth/auth.js'
-
+import path from 'path'
 import Registers from '../schema/register.js'
 import Users from '../schema/schema.js'
 const router = express.Router()
@@ -26,7 +26,8 @@ router.get('/api', async (req, res) => {
 
 })
 router.get('/', (req, res) => {
-    res.send("welcome to the express")
+    res.sendFile(path.join(__dirname, '/build/index.html'))
+  
 
 })
 router.post('/register', async (req, res, next) => {
