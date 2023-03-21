@@ -26,7 +26,7 @@ router.get('/api', async (req, res) => {
 
 })
 router.get('/', (req, res) => {
-    res.sendFile(path.join( 'index.html'))
+    res.send('welcome to express')
   
 
 })
