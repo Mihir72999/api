@@ -9,6 +9,7 @@ app.use(cookieParser({
      httpOnly: true,
        secure: true,
 }))
+app.use(express.static('build'))
 connectMongoDb()
 app.use( router)
 
