@@ -5,7 +5,10 @@ import cookieParser from 'cookie-parser'
 const port = 4000
 const app = express()
 app.use(express.json())
-app.use(cookieParser())
+app.use(cookieParser({
+     httpOnly: true,
+       secure: true,
+}))
 connectMongoDb()
 app.use( router)
 
