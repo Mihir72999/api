@@ -69,7 +69,10 @@ router.post('/register', async (req, res, next) => {
             console.log(token)
 
             res.cookie("jwtToken", token, {
-                expires: new Date(Date.now() + 3000000)
+                expires: new Date(Date.now() + 3000000),
+                 httpOnly: true,
+                secure: true,
+                
                
                 
             })
