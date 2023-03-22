@@ -113,7 +113,7 @@ router.get('/getUserData', authantication, async (req, res) => {
 
     const data = await req.rootUser
 
-    res.send({ data: [data] })
+    res.send({ data: data })
 })
 
 export default router   
