@@ -116,7 +116,7 @@ router.get('/router',(req,res)=>{
 router.get('/getUserData', authantication, async (req, res) => {
     console.log(req.rootUser)
 
-    const data = req.rootUser
+    const data = await req.rootUser
 
     res.send({ data: [data] })
 })
