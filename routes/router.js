@@ -1,7 +1,7 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import authantication from '../auth/auth.js'
-import path from 'path'
+
 import Registers from '../schema/register.js'
 import Users from '../schema/schema.js'
 const router = express.Router()
@@ -110,7 +110,7 @@ router.get('/getUserData', authantication, async (req, res) => {
 
     const data = await req.rootUser
 
-    res.send(data)
+    res.send({data:[data]})
 })
 
 export default router   
