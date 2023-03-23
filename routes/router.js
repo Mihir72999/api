@@ -30,11 +30,11 @@ router.get('/', (req, res) => {
   
 
 })
-router.post('/register', async (req, res, next) => {
+router.post('/register', async (req, res) => {
     const { name, email, number } = req.body
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const userExist = await Registers.findOne({ email })
+   
 
 
     if (!name || !email || !number) {
@@ -44,17 +44,14 @@ router.post('/register', async (req, res, next) => {
     try {
         if (!emailRegex.test(email)) {
 
-            res.status(422).send('you have to fill correct email')
+         return   res.status(422).send('you have to fill correct email')
         }
 
 
         else if (number.length !== 10) {
-            res.status(422).send('this is invalid number')
+          return  res.status(422).send('this is invalid number')
         }
-        else if (userExist) {
-
-            res.status(422).send('user already exists')
-        }
+   
         else {
 
 
@@ -74,12 +71,12 @@ router.post('/register', async (req, res, next) => {
              
             console.log(register)
            await register.save()
-           res.send('data send successfuly')
+           res.json({message:"data send successfuly"})
         }
     } catch (error) {
-        res.status(422).send('Invalid Registration')
+        res.status(422).json({message:"invalid registration"})
     }
-    next()
+    
 
 })
 
