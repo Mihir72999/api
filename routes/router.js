@@ -71,10 +71,10 @@ router.post('/register', async (req, res) => {
              
             console.log(register)
            await register.save()
-           res.json({message:"data send successfuly"})
+           res.json({"message":"data send successfuly"})
         }
     } catch (error) {
-        res.status(422).json({message:"invalid registration"})
+        res.status(422).json({"message":"invalid registration"})
     }
     
 
