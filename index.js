@@ -10,7 +10,7 @@ app.use(express.json())
 
 app.use(cookieParser())
 connectMongoDb()
-app.use(express.static('build'))
+
 
 app.use( router)
 
