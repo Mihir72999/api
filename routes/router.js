@@ -38,18 +38,18 @@ router.post('/register', async (req, res) => {
 
 
     if (!name || !email || !number) {
-        return res.status(422).send('invalid registration user has to blank field email or name')
+        return res.status(422).json({"message":"you have to fill blank form"})
     }
 
     try {
         if (!emailRegex.test(email)) {
 
-         return   res.status(422).send('you have to fill correct email')
+         return   res.status(422).json({"messsage":"you have to fill correct email"})
         }
 
 
         else if (number.length !== 10) {
-          return  res.status(422).send('this is invalid number')
+          return  res.status(422).json({"message":"this is invalid number"})
         }
    
         else {
@@ -71,7 +71,7 @@ router.post('/register', async (req, res) => {
              
             console.log(register)
            await register.save()
-           res.json({"message":"data send successfuly"})
+           res.json({"message":"data send successfuly",data:"token"})
         }
     } catch (error) {
         res.status(422).json({"message":"invalid registration"})
