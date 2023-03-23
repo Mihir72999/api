@@ -22,8 +22,6 @@ router.get('/api', async (req, res) => {
     } catch (error) {
         console.log(error)
     }
-
-
 })
 router.get('/', (req, res) => {
     res.send('welcome to express')
