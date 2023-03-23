@@ -9,7 +9,7 @@ const registerSchema = new mongoose.Schema({
     email: {
       type: String,
       required: true,
-      unique: true,
+     
       validate: {
         validator: function(email) {  
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
