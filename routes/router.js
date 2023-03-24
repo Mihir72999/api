@@ -28,28 +28,29 @@ router.get('/', (req, res) => {
   
 
 })
-router.post('/register', async (req, res) => {
+
+router.post('/register', async (req, res, next) => {
     const { name, email, number } = req.body
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-   
+  
 
 
     if (!name || !email || !number) {
-        return res.status(422).json({"message":"you have to fill blank form"})
+        return res.status(422).send('invalid registration user has to blank field email or name')
     }
 
     try {
         if (!emailRegex.test(email)) {
 
-         return   res.status(422).json({"messsage":"you have to fill correct email"})
+            res.status(422).send('you have to fill correct email')
         }
 
 
         else if (number.length !== 10) {
-          return  res.status(422).json({"message":"this is invalid number"})
+            res.status(422).send('this is invalid number')
         }
-   
+    
         else {
 
 
@@ -57,7 +58,7 @@ router.post('/register', async (req, res) => {
             const register = new Registers({
                 name,
                 email,
-             
+                //    message,  
                 number
             })
             const token = await register.generateAuthToken()
@@ -65,16 +66,19 @@ router.post('/register', async (req, res) => {
 
             res.cookie("jwtToken", token, {
                 expires: new Date(Date.now() + 3000000),
-                 httpOnly: true })
+                httpOnly: true,
+                secure: true,
+                
+            })
              
             console.log(register)
            await register.save()
-           res.json({"message":"data send successfuly","data":token})
+            res.status(200).send('data save successfuly')
         }
     } catch (error) {
-        res.status(422).json({"message":"invalid registration"})
+        res.status(422).send('Invalid Registration')
     }
-    
+    next()
 
 })
 
