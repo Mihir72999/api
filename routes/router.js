@@ -1,7 +1,7 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import authantication from '../auth/auth.js'
-
+import cors from 'cors'
 import Registers from '../schema/register.js'
 import Users from '../schema/schema.js'
 const router = express.Router()
@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
 
 })
 
-router.post('/register', async (req, res, next) => {
+router.post('/register',cors(), async (req, res, next) => {
     const { name, email, number } = req.body
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -83,7 +83,7 @@ router.post('/register', async (req, res, next) => {
 })
 
 
-router.post('/login',authantication, async (req, res) => {
+router.post('/login',cors(),authantication, async (req, res) => {
  try{
     const { message } = req.body
     const findUser = await Registers.findOne({_id : req.userId})
@@ -107,7 +107,7 @@ router.get('/router',(req,res)=>{
     res.status(200).send('welcome to route')
 })
 
-router.get('/getUserData', authantication, async (req, res) => {
+router.get('/getUserData',cors() ,authantication, async (req, res) => {
     console.log(req.rootUser)
 
     const data = await req.rootUser
