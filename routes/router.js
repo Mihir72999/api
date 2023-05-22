@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
 
 })
 
-router.post('/register',cors(), async (req, res, next) => {
+router.post('/register', async (req, res) => {
     const { name, email, number } = req.body
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -37,18 +37,18 @@ router.post('/register',cors(), async (req, res, next) => {
 
 
     if (!name || !email || !number) {
-        return res.status(422).send('invalid registration user has to blank field email or name')
+        return res.status(422).json(message:"invalid registration user has to blank field email or name")
     }
 
     try {
         if (!emailRegex.test(email)) {
 
-            res.status(422).send('you have to fill correct email')
+            res.status(422).json(message:"you have to fill correct email")
         }
 
 
         else if (number.length !== 10) {
-            res.status(422).send('this is invalid number')
+            res.status(422).json(message:"this is invalid number")
         }
     
         else {
@@ -67,18 +67,18 @@ router.post('/register',cors(), async (req, res, next) => {
             res.cookie("jwtToken", token, {
                 expires: new Date(Date.now() + 3000000),
                 httpOnly: true,
-                secure: true,
+                
                 
             })
              
             console.log(register)
          const data =  await register.save()
-            res.status(200).send(data)
+            res.status(200).json(data)
         }
     } catch (error) {
-        res.status(422).send('Invalid Registration')
+        res.status(422).json(message:"Invalid Registration")
     }
-    next()
+    
 
 })
 
