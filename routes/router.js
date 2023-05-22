@@ -64,7 +64,7 @@ router.post('/register', async (req, res) => {
             const token = await register.generateAuthToken()
             console.log(token)
 
-            res.cookie("jwtToken", token, {
+        const cook = res.cookie("jwtToken", token, {
                 expires: new Date(Date.now() + 3000000),
                 httpOnly: true,
                 
@@ -73,7 +73,7 @@ router.post('/register', async (req, res) => {
              
             console.log(register)
          const data =  await register.save()
-            res.status(200).json(data)
+            res.status(200).json(data,cook)
         }
     } catch (error) {
         res.status(422).json({message:"Invalid Registration"})
