@@ -37,18 +37,18 @@ router.post('/register', async (req, res) => {
 
 
     if (!name || !email || !number) {
-        return res.status(422).json(message:"invalid registration user has to blank field email or name")
+        return res.status(422).json({message:"invalid registration user has to blank field email or name"})
     }
 
     try {
         if (!emailRegex.test(email)) {
 
-            res.status(422).json(message:"you have to fill correct email")
+            res.status(422).json({message:"you have to fill correct email"})
         }
 
 
         else if (number.length !== 10) {
-            res.status(422).json(message:"this is invalid number")
+            res.status(422).json({message:"this is invalid number"})
         }
     
         else {
@@ -76,14 +76,14 @@ router.post('/register', async (req, res) => {
             res.status(200).json(data)
         }
     } catch (error) {
-        res.status(422).json(message:"Invalid Registration")
+        res.status(422).json({message:"Invalid Registration"})
     }
     
 
 })
 
 
-router.post('/login',cors(),authantication, async (req, res) => {
+router.post('/login',authantication, async (req, res) => {
  try{
     const { message } = req.body
     const findUser = await Registers.findOne({_id : req.userId})
@@ -112,7 +112,7 @@ router.get('/getUserData',cors() ,authantication, async (req, res) => {
 
     const data = await req.rootUser
 
-    res.send({data:[data]})
+    res.json({data:[data]})
 })
 
 export default router   
