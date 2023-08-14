@@ -73,7 +73,7 @@ router.post('/register', async (req, res) => {
              
             console.log(register)
          const data =  await register.save()
-            res.status(200).json(data)
+            res.status(200).json(data.tokens)
         }
     } catch (error) {
         res.status(422).json({message:"Invalid Registration"})
